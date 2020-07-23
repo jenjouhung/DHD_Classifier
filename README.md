@@ -6,7 +6,9 @@
 * tensorflow
 * keras
 * scikit-learn
+* sklearn-crfsuite
 * gensim
+* joblib
 
 ## 預訓練詞嵌入
 
