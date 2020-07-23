@@ -14,13 +14,13 @@ wordf = open(WORD2IDX_FILE, 'rb')
 word2idx = pickle.load(wordf)
 n_words = len(word2idx)
 
-# 建立雙向 LSTM 模型
-#model = birnn.create_model(n_words, n_tags, param.SENTENCE_MAX_LEN, param.LSTM_UNITS, param.EMBEDDING_DIMENSION)
-#model.load_weights(param.OUTPUT_MODEL_FILE)
+# 建立模型
 model = keras.models.load_model(param.OUTPUT_MODEL_FILE)
 
-# 請使用者輸入想要進行 NER 標注的句子
-sentence = input("請輸入句子：")
+# 請使用者輸入想要進行文本分類的段落
+sentence = input("請輸入段落內容：")
+
+# 進行 CRF 佛典分詞
 cut_sentence = crfsegmenter.cut(sentence)
 
 # 將使用者輸入的句子進行填充到固定的長度
@@ -30,4 +30,6 @@ X_test = pad_sequences(maxlen=param.SENTENCE_MAX_LEN, sequences=X_test, padding=
 
 # 利用模型進行預測
 p = model.predict(np.array([X_test[0]]), verbose=0)
+
+# 印出預測結果，偏向 1 代表較可能是佛醫文獻，偏向 0 則代表較不可能是
 print(p[0][0])
