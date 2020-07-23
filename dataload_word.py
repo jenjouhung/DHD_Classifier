@@ -26,20 +26,22 @@ def load():
             text = line.strip().split(' ')
             negative_sentences.append(text)
 
+    # 將句子順序打亂
     random.shuffle(positive_sentences)
     random.shuffle(negative_sentences)
 
     positive_tags = [1] * len(positive_sentences)
     negative_tags = [0] * len(negative_sentences)
 
+    # 計算 positive 和 negative 的混合比例
     positive_portion_index = int(len(positive_sentences) * param.TRAIN_TEST_PORTION)
     negative_portion_index = positive_portion_index * param.NEGATIVE_SAMPLE_MULTIPLE
 
     train_sentences = positive_sentences[:positive_portion_index] + negative_sentences[:negative_portion_index]
-    train_sentences = [ x[:MAX_WORDS] if len(x) > MAX_WORDS else x for x in train_sentences ]
+    train_sentences = [ x[:MAX_WORDS] if len(x) > MAX_WORDS else x for x in train_sentences ] # 過長的句子進行截斷
     train_tags = positive_tags[:positive_portion_index] + negative_tags[:negative_portion_index]
     test_sentences = positive_sentences[positive_portion_index:] + negative_sentences[negative_portion_index:]
-    test_sentences = [ x[:MAX_WORDS] if len(x) > MAX_WORDS else x for x in test_sentences ]
+    test_sentences = [ x[:MAX_WORDS] if len(x) > MAX_WORDS else x for x in test_sentences ] # 過長的句子進行截斷
     test_tags = positive_tags[positive_portion_index:] + negative_tags[negative_portion_index:]
     return train_sentences, train_tags, test_sentences, test_tags
 
@@ -51,13 +53,3 @@ if __name__ == '__main__':
     print(test_data[5], test_data[5])
     print(len(test_data[5]))
 
-#tk = Tokenizer(oov_token='UNK')
-#tk.fit_on_texts(all_sentences)
-#tk.word_index = {e:i for e,i in tk.word_index.items() if i <= num_words}
-#tk.word_index[tk.oov_token] = num_words + 1 
-#print(tk.word_index)
-#X_train = tk.texts_to_sequences(positive_sentences)
-#print(len(positive_sentences[1]))
-#print(positive_sentences[1])
-#print(len(X_train[1]))
-#print(X_train[1])
