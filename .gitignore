@@ -1,0 +1,5 @@
+out/dhd_model.h5
+__pycache__/
+wordcut/__pycache__/
+model/__pycache__/
+embedding/word/fasttext*
