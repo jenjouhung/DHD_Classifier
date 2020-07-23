@@ -22,19 +22,19 @@
 
 * param.py : 模型相關參數設定皆位於此
 * dataload.py : 載入訓練與測試資料集
- * dataload_char.py : 載入單字資料集
- * dataload_word.py : 載入經過分詞的資料集
+  * dataload_char.py : 載入單字資料集
+  * dataload_word.py : 載入經過分詞的資料集
 * train.py : 訓練步驟實作
 * predict.py : 完成訓練後，可輸入句子取得辨識結果
 
 ## 目錄說明
 
 * model/ : 類神經網路模型實作 (目前有 雙向LSTM(birnn.py) 與 雙向LSTM+注意力機制(att_birnn.py) 兩種模型)
-* preporcess/ : 資料集預處理相關程式 (處理 test_data/ 裡的原始資料)
+* preprocess/ : 資料集預處理相關程式 (處理 test_data/ 裡的原始資料)
 * wordcut/ : CRF佛典分詞模型 (進行分詞用)
 * embedding/ : 預訓練嵌入
- * embedding/character/ : 預訓練單字嵌入 (以 Word2Vec 訓練)
- * embedding/word/ : 預訓練詞嵌入 (經過分詞，以 FastText 訓練)
+  * embedding/character/ : 預訓練單字嵌入 (以 Word2Vec 訓練)
+  * embedding/word/ : 預訓練詞嵌入 (經過分詞，以 FastText 訓練)
 * out/ : 輸出目錄，訓練出來的模型參數檔會放在這裡
 
 ## 進行訓練
